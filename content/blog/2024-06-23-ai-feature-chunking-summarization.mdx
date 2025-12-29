@@ -1,0 +1,30 @@
+---
+title: "Lessons from building an AI feature that works - chunking and summarization"
+date: "2024-06-23"
+excerpt: "Insights from building Looppanel's AI notes feature, focusing on chunking transcripts and balancing technical sophistication with user experience."
+category: "AI"
+tags: ["ai", "llm", "product", "ux", "data-engineering"]
+published: true
+---
+
+## Overview
+
+Akash Tandon shares insights from building Looppanel's AI notes feature, which generates high-quality notes from user interview transcripts. The post focuses on two critical components: chunking and summarization, emphasizing how data engineering and user experience are essential alongside the underlying language model.
+
+## Chunking
+
+The initial challenge involved breaking down interview transcripts into meaningful semantic units. Tandon explains that standard chunking approaches—based on sentence count or semantic similarity—failed to preserve the natural conversation flow.
+
+Rather than relying on generic solutions, the team developed a domain-specific approach. "It accounted for distinction between interviewer and interviewee speech, and identified topic changes in the conversation, to find relevant boundaries."
+
+This custom methodology proved valuable beyond the initial feature, supporting multiple subsequent products.
+
+## Summarization
+
+Interestingly, summarization presented greater user experience challenges than technical ones. The author discovered that "a user can care deeply about the tone, length, and choice of words of a summary."
+
+Beta testers focused intensely on language quality over other aspects. This prompted iterative refinement of prompts controlling summary length and tone. Tandon acknowledges this insight should have informed development earlier, suggesting teams should "leverage domain expertise earlier" when crafting user-facing text.
+
+## Key Takeaway
+
+Building successful AI products requires balancing technological sophistication with genuine user experience considerations—a principle easily overlooked when focusing on complex engineering work.
