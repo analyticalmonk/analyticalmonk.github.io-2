@@ -4,17 +4,20 @@ import rehypeSlug from 'rehype-slug'
 import rehypeAutolinkHeadings from 'rehype-autolink-headings'
 import remarkGfm from 'remark-gfm'
 
-const mdxOptions = {
-  mdxOptions: {
-    remarkPlugins: [remarkGfm],
-    rehypePlugins: [
-      rehypeHighlight,
-      rehypeSlug,
-      [rehypeAutolinkHeadings, { behavior: 'wrap' }],
-    ],
-  },
-}
-
 export async function renderMDX(content: string) {
-  return <MDXRemote source={content} options={mdxOptions} />
+  return (
+    <MDXRemote
+      source={content}
+      options={{
+        mdxOptions: {
+          remarkPlugins: [remarkGfm],
+          rehypePlugins: [
+            rehypeHighlight,
+            rehypeSlug,
+            [rehypeAutolinkHeadings, { behavior: 'wrap' }],
+          ],
+        },
+      }}
+    />
+  )
 }
