@@ -4,7 +4,7 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: '',
+  basePath: '/analyticalmonk.github.io-2',
   trailingSlash: true,
 }
 

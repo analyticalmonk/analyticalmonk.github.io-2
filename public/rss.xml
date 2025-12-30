@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:content="http://purl.org/rss/1.0/modules/content/">
+    <channel>
+        <title>Akash Tandon</title>
+        <link>https://akashtandon.in</link>
+        <description>Founder, builder, and writer. I write about startups, AI, and technology.</description>
+        <lastBuildDate>Tue, 30 Dec 2025 08:11:19 GMT</lastBuildDate>
+        <docs>https://validator.w3.org/feed/docs/rss2.html</docs>
+        <generator>https://github.com/jpmonette/feed</generator>
+        <language>en</language>
+        <copyright>All rights reserved 2025, Akash Tandon</copyright>
+        <item>
+            <title><![CDATA[Four years a founder - Time]]></title>
+            <link>https://akashtandon.in/blog/2025-01-05-four-years-founder-time/</link>
+            <guid>https://akashtandon.in/blog/2025-01-05-four-years-founder-time</guid>
+            <pubDate>Sun, 05 Jan 2025 00:00:00 GMT</pubDate>
+            <description><![CDATA[Learnings and anecdotes from four years as a startup founder - timing matters, accept the past and good things take time.]]></description>
+            <content:encoded><![CDATA[Learnings and anecdotes from four years as a startup founder - timing matters, accept the past and good things take time.]]></content:encoded>
+            <category>Startup</category>
+        </item>
+        <item>
+            <title><![CDATA[Lessons from building an AI feature that works - chunking and summarization]]></title>
+            <link>https://akashtandon.in/blog/2024-06-23-ai-feature-chunking-summarization/</link>
+            <guid>https://akashtandon.in/blog/2024-06-23-ai-feature-chunking-summarization</guid>
+            <pubDate>Sun, 23 Jun 2024 00:00:00 GMT</pubDate>
+            <description><![CDATA[Lessons from creating a successful LLM-based feature for breaking down and summarizing user interviews, emphasizing how we nailed it by focusing on context, user feedback, and the right balance of AI and user experience.]]></description>
+            <content:encoded><![CDATA[Lessons from creating a successful LLM-based feature for breaking down and summarizing user interviews, emphasizing how we nailed it by focusing on context, user feedback, and the right balance of AI and user experience.]]></content:encoded>
+            <category>AI</category>
+        </item>
+        <item>
+            <title><![CDATA[Brief lessons from using LLM APIs in production]]></title>
+            <link>https://akashtandon.in/blog/2023-08-20-llm-apis-production/</link>
+            <guid>https://akashtandon.in/blog/2023-08-20-llm-apis-production</guid>
+            <pubDate>Sun, 20 Aug 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Lessons that can help you when using large language models (LLMs) in a software production environment]]></description>
+            <content:encoded><![CDATA[Lessons that can help you when using large language models (LLMs) in a software production environment]]></content:encoded>
+            <category>AI</category>
+        </item>
+        <item>
+            <title><![CDATA[Beyond Utility - The Role of User Experience in Enterprise Software]]></title>
+            <link>https://akashtandon.in/blog/2023-05-28-ux-enterprise-software/</link>
+            <guid>https://akashtandon.in/blog/2023-05-28-ux-enterprise-software</guid>
+            <pubDate>Sun, 28 May 2023 00:00:00 GMT</pubDate>
+            <description><![CDATA[Frameworks to think about role of user experience when creating enterprise software]]></description>
+            <content:encoded><![CDATA[Frameworks to think about role of user experience when creating enterprise software]]></content:encoded>
+            <category>Startup</category>
+        </item>
+        <item>
+            <title><![CDATA[Understanding natural language technology through a project-first approach]]></title>
+            <link>https://akashtandon.in/blog/2020-07-30-natural-language-technology/</link>
+            <guid>https://akashtandon.in/blog/2020-07-30-natural-language-technology</guid>
+            <pubDate>Thu, 30 Jul 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[Blueprint to understand recent advances in natural language technology in a hands-on manner. Topics covered include transformers, language models (BERT, GPT-2), evaluation benchmarks, and conversational interfaces/chatbots.]]></description>
+            <content:encoded><![CDATA[Blueprint to understand recent advances in natural language technology in a hands-on manner. Topics covered include transformers, language models (BERT, GPT-2), evaluation benchmarks, and conversational interfaces/chatbots.]]></content:encoded>
+            <category>Technology</category>
+        </item>
+        <item>
+            <title><![CDATA[Frameworks and philosophy for thinking about a startup co-founder]]></title>
+            <link>https://akashtandon.in/blog/2020-07-12-cofounder-frameworks/</link>
+            <guid>https://akashtandon.in/blog/2020-07-12-cofounder-frameworks</guid>
+            <pubDate>Sun, 12 Jul 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[A guiding philosophy and collection of frameworks for thinking about a startup co-founder.]]></description>
+            <content:encoded><![CDATA[A guiding philosophy and collection of frameworks for thinking about a startup co-founder.]]></content:encoded>
+            <category>Startup</category>
+        </item>
+        <item>
+            <title><![CDATA[Gift of inspiration and its role in technology]]></title>
+            <link>https://akashtandon.in/blog/2020-06-22-gift-of-inspiration/</link>
+            <guid>https://akashtandon.in/blog/2020-06-22-gift-of-inspiration</guid>
+            <pubDate>Mon, 22 Jun 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[Musings about inspiration, its importance for technological progress and a call for action to inspire those around you.]]></description>
+            <content:encoded><![CDATA[Musings about inspiration, its importance for technological progress and a call for action to inspire those around you.]]></content:encoded>
+            <category>Essays</category>
+        </item>
+        <item>
+            <title><![CDATA[Technology in law - a 10,000 feet overview of legaltech]]></title>
+            <link>https://akashtandon.in/blog/2020-06-16-legaltech-overview/</link>
+            <guid>https://akashtandon.in/blog/2020-06-16-legaltech-overview</guid>
+            <pubDate>Tue, 16 Jun 2020 00:00:00 GMT</pubDate>
+            <description><![CDATA[A high-level overview of Legal Tech.]]></description>
+            <content:encoded><![CDATA[A high-level overview of Legal Tech.]]></content:encoded>
+            <category>Technology</category>
+        </item>
+    </channel>
+</rss>
