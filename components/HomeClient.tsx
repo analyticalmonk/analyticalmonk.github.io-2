@@ -16,50 +16,26 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
     if (saved !== null) {
       setIsRetroMode(saved === 'true')
     }
-  }, [])
 
-  const toggleMode = () => {
-    const newMode = !isRetroMode
-    setIsRetroMode(newMode)
-    localStorage.setItem('retro-mode', String(newMode))
-  }
+    // Listen for changes from Header toggle
+    const handleModeChange = () => {
+      const saved = localStorage.getItem('retro-mode')
+      if (saved !== null) {
+        setIsRetroMode(saved === 'true')
+      }
+    }
+    window.addEventListener('retro-mode-change', handleModeChange)
+
+    return () => {
+      window.removeEventListener('retro-mode-change', handleModeChange)
+    }
+  }, [])
 
   if (!mounted) {
     return null
   }
 
-  return (
-    <>
-      {/* Mode Toggle */}
-      <button
-        onClick={toggleMode}
-        className={`fixed top-4 left-4 md:top-6 md:left-6 z-50 px-4 py-3 rounded-lg font-medium transition-all duration-300 text-sm ${
-          isRetroMode
-            ? 'bg-yellow-400 text-black border-4 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
-            : 'bg-white text-gray-700 border-2 border-gray-300 hover:border-accent shadow-md hover:shadow-lg'
-        }`}
-        aria-label="Toggle time machine"
-        style={isRetroMode ? { fontFamily: 'Courier New, monospace' } : {}}
-      >
-        <div className="flex flex-col items-start gap-0.5">
-          <div className="flex items-center gap-2">
-            <span className="text-lg">⏰</span>
-            <span className="font-semibold">
-              {isRetroMode ? '1995' : 'Time Machine'}
-            </span>
-          </div>
-          {!isRetroMode && (
-            <span className="text-xs text-gray-500">Travel to 1995</span>
-          )}
-          {isRetroMode && (
-            <span className="text-xs opacity-75">Return to 2025 →</span>
-          )}
-        </div>
-      </button>
-
-      {isRetroMode ? <RetroLanding posts={posts} /> : <MinimalLanding posts={posts} />}
-    </>
-  )
+  return isRetroMode ? <RetroLanding posts={posts} /> : <MinimalLanding posts={posts} />
 }
 
 // Original minimal design
