@@ -33,15 +33,28 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
       {/* Mode Toggle */}
       <button
         onClick={toggleMode}
-        className={`fixed top-4 right-4 md:top-6 md:right-6 z-50 px-5 py-2.5 rounded-lg font-medium transition-all duration-300 text-sm ${
+        className={`fixed top-4 left-4 md:top-6 md:left-6 z-50 px-4 py-3 rounded-lg font-medium transition-all duration-300 text-sm ${
           isRetroMode
             ? 'bg-yellow-400 text-black border-4 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
-            : 'bg-white text-gray-700 border border-gray-200 hover:border-gray-300 shadow-sm hover:shadow-md'
+            : 'bg-white text-gray-700 border-2 border-gray-300 hover:border-accent shadow-md hover:shadow-lg'
         }`}
-        aria-label="Toggle design mode"
+        aria-label="Toggle time machine"
         style={isRetroMode ? { fontFamily: 'Courier New, monospace' } : {}}
       >
-        {isRetroMode ? '⏰ 1995' : '◇ 2025'}
+        <div className="flex flex-col items-start gap-0.5">
+          <div className="flex items-center gap-2">
+            <span className="text-lg">⏰</span>
+            <span className="font-semibold">
+              {isRetroMode ? '1995' : 'Time Machine'}
+            </span>
+          </div>
+          {!isRetroMode && (
+            <span className="text-xs text-gray-500">Travel to 1995</span>
+          )}
+          {isRetroMode && (
+            <span className="text-xs opacity-75">Return to 2025 →</span>
+          )}
+        </div>
       </button>
 
       {isRetroMode ? <RetroLanding posts={posts} /> : <MinimalLanding posts={posts} />}
@@ -182,7 +195,7 @@ function RetroLanding({ posts }: { posts: BlogPost[] }) {
                   <span style={{ fontSize: '14px' }}>You are visitor number</span>
                 </center>
 
-                <hr style={{ height: '5px', backgroundColor: '#FF00FF', border: 'none' }} />
+                <hr style={{ height: '3px', backgroundColor: '#FF00FF', border: 'none', margin: '20px 0' }} />
 
                 {/* Social Links - 90s style */}
                 <center>
@@ -192,7 +205,7 @@ function RetroLanding({ posts }: { posts: BlogPost[] }) {
                   <SocialLinks />
                 </center>
 
-                <hr style={{ height: '5px', backgroundColor: '#00FFFF', border: 'none' }} />
+                <hr style={{ height: '3px', backgroundColor: '#00FFFF', border: 'none', margin: '20px 0' }} />
 
                 {/* Blog Posts */}
                 {posts.length > 0 && (
@@ -281,7 +294,7 @@ function RetroLanding({ posts }: { posts: BlogPost[] }) {
                   </>
                 )}
 
-                <hr style={{ height: '5px', backgroundColor: '#FF00FF', border: 'none' }} />
+                <hr style={{ height: '3px', backgroundColor: '#FF00FF', border: 'none', margin: '20px 0' }} />
 
                 {/* Footer */}
                 <center>
