@@ -7,6 +7,7 @@ import { usePathname } from 'next/navigation'
 export default function Header() {
   const [isRetroMode, setIsRetroMode] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [isTransitioning, setIsTransitioning] = useState(false)
   const pathname = usePathname()
 
   useEffect(() => {
@@ -23,13 +24,21 @@ export default function Header() {
         setIsRetroMode(saved === 'true')
       }
     }
+
+    // Listen for transition start
+    const handleTransitionStart = () => {
+      setIsTransitioning(true)
+      setTimeout(() => setIsTransitioning(false), 1400)
+    }
+
     window.addEventListener('storage', handleStorageChange)
-    // Also listen for custom event from same page
     window.addEventListener('retro-mode-change', handleStorageChange)
+    window.addEventListener('retro-mode-change', handleTransitionStart)
 
     return () => {
       window.removeEventListener('storage', handleStorageChange)
       window.removeEventListener('retro-mode-change', handleStorageChange)
+      window.removeEventListener('retro-mode-change', handleTransitionStart)
     }
   }, [])
 
@@ -65,7 +74,13 @@ export default function Header() {
   const isHomepage = pathname === '/' || pathname === '/analyticalmonk.github.io-2' || pathname === '/analyticalmonk.github.io-2/'
 
   return (
-    <header className="border-b border-gray-200">
+    <header
+      className="border-b border-gray-200 transition-all duration-700 ease-in-out"
+      style={{
+        opacity: isTransitioning ? 0.2 : 1,
+        transform: isTransitioning ? 'scale(0.95)' : 'scale(1)'
+      }}
+    >
       <nav className="max-w-4xl mx-auto px-4 py-6 flex justify-between items-center">
         <Link href="/" className="text-xl font-bold hover:text-accent transition-colors">
           Akash Tandon

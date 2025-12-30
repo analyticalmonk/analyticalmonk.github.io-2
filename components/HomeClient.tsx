@@ -9,6 +9,7 @@ import { BlogPost } from '@/types/blog'
 export default function HomeClient({ posts }: { posts: BlogPost[] }) {
   const [isRetroMode, setIsRetroMode] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const [isTransitioning, setIsTransitioning] = useState(false)
 
   useEffect(() => {
     setMounted(true)
@@ -19,10 +20,16 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
 
     // Listen for changes from Header toggle
     const handleModeChange = () => {
-      const saved = localStorage.getItem('retro-mode')
-      if (saved !== null) {
-        setIsRetroMode(saved === 'true')
-      }
+      setIsTransitioning(true)
+      // Delay the mode change to allow fade out
+      setTimeout(() => {
+        const saved = localStorage.getItem('retro-mode')
+        if (saved !== null) {
+          setIsRetroMode(saved === 'true')
+        }
+        // Allow fade in
+        setTimeout(() => setIsTransitioning(false), 50)
+      }, 1400)
     }
     window.addEventListener('retro-mode-change', handleModeChange)
 
@@ -35,7 +42,74 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
     return null
   }
 
-  return isRetroMode ? <RetroLanding posts={posts} /> : <MinimalLanding posts={posts} />
+  return (
+    <>
+      {/* Time machine transition overlay */}
+      {isTransitioning && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none"
+          style={{
+            background: 'linear-gradient(135deg, rgba(79, 177, 186, 0.15) 0%, rgba(79, 177, 186, 0.25) 100%)',
+            animation: 'overlayFade 1.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)'
+          }}
+        >
+          <div style={{
+            fontSize: '80px',
+            animation: 'clockSpin 1.4s cubic-bezier(0.34, 1.56, 0.64, 1)',
+            opacity: 0.9
+          }}>
+            ⏰
+          </div>
+        </div>
+      )}
+
+      <div
+        className="transition-all duration-700 ease-in-out"
+        style={{
+          opacity: isTransitioning ? 0.2 : 1,
+          transform: isTransitioning ? 'scale(0.95)' : 'scale(1)'
+        }}
+      >
+        {isRetroMode ? <RetroLanding posts={posts} /> : <MinimalLanding posts={posts} />}
+      </div>
+
+      {/* Keyframe animations */}
+      <style jsx>{`
+        @keyframes overlayFade {
+          0% {
+            opacity: 0;
+            backdrop-filter: blur(0px);
+          }
+          30% {
+            opacity: 1;
+            backdrop-filter: blur(12px);
+          }
+          70% {
+            opacity: 1;
+            backdrop-filter: blur(12px);
+          }
+          100% {
+            opacity: 0;
+            backdrop-filter: blur(0px);
+          }
+        }
+        @keyframes clockSpin {
+          0% {
+            transform: scale(0.7) rotate(-45deg);
+            opacity: 0;
+          }
+          50% {
+            transform: scale(1.1) rotate(20deg);
+            opacity: 1;
+          }
+          100% {
+            transform: scale(0.7) rotate(0deg);
+            opacity: 0;
+          }
+        }
+      `}</style>
+    </>
+  )
 }
 
 // Original minimal design
