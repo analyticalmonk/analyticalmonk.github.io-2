@@ -7,21 +7,21 @@ import Link from 'next/link'
 import { BlogPost } from '@/types/blog'
 
 export default function HomeClient({ posts }: { posts: BlogPost[] }) {
-  const [isRefinedMode, setIsRefinedMode] = useState(false)
+  const [isRetroMode, setIsRetroMode] = useState(false)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
     setMounted(true)
-    const saved = localStorage.getItem('refined-mode')
+    const saved = localStorage.getItem('retro-mode')
     if (saved !== null) {
-      setIsRefinedMode(saved === 'true')
+      setIsRetroMode(saved === 'true')
     }
   }, [])
 
   const toggleMode = () => {
-    const newMode = !isRefinedMode
-    setIsRefinedMode(newMode)
-    localStorage.setItem('refined-mode', String(newMode))
+    const newMode = !isRetroMode
+    setIsRetroMode(newMode)
+    localStorage.setItem('retro-mode', String(newMode))
   }
 
   if (!mounted) {
@@ -34,16 +34,17 @@ export default function HomeClient({ posts }: { posts: BlogPost[] }) {
       <button
         onClick={toggleMode}
         className={`fixed top-4 right-4 md:top-6 md:right-6 z-50 px-5 py-2.5 rounded-lg font-medium transition-all duration-300 text-sm ${
-          isRefinedMode
-            ? 'bg-gradient-to-r from-slate-800 to-slate-900 text-white border border-slate-700 hover:border-accent shadow-lg hover:shadow-xl'
+          isRetroMode
+            ? 'bg-yellow-400 text-black border-4 border-black font-bold shadow-[4px_4px_0px_0px_rgba(0,0,0,1)]'
             : 'bg-white text-gray-700 border border-gray-200 hover:border-gray-300 shadow-sm hover:shadow-md'
         }`}
         aria-label="Toggle design mode"
+        style={isRetroMode ? { fontFamily: 'Courier New, monospace' } : {}}
       >
-        {isRefinedMode ? '✦ Refined' : '◇ Classic'}
+        {isRetroMode ? '⏰ 1995' : '◇ 2025'}
       </button>
 
-      {isRefinedMode ? <RefinedLanding posts={posts} /> : <MinimalLanding posts={posts} />}
+      {isRetroMode ? <RetroLanding posts={posts} /> : <MinimalLanding posts={posts} />}
     </>
   )
 }
@@ -81,163 +82,242 @@ function MinimalLanding({ posts }: { posts: BlogPost[] }) {
   )
 }
 
-// New refined design
-function RefinedLanding({ posts }: { posts: BlogPost[] }) {
+// 1990s GeoCities-style retro design
+function RetroLanding({ posts }: { posts: BlogPost[] }) {
   return (
-    <div className="min-h-screen bg-gradient-to-b from-white via-slate-50 to-white">
-      {/* Hero Section */}
-      <section className="max-w-5xl mx-auto px-6 pt-24 pb-16">
-        <div className="relative">
-          {/* Decorative element */}
-          <div className="absolute -left-3 top-0 w-1 h-24 bg-gradient-to-b from-accent to-transparent opacity-60"></div>
-
-          <div className="space-y-6">
-            <div className="inline-block">
-              <span className="text-sm uppercase tracking-[0.2em] text-gray-500 font-medium">
-                Welcome
-              </span>
-            </div>
-
-            <h1
-              className="text-5xl md:text-7xl font-bold leading-tight tracking-tight"
-              style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}
-            >
-              <span className="block text-gray-900">Hi, I'm</span>
-              <span className="block bg-gradient-to-r from-gray-900 via-slate-800 to-gray-700 bg-clip-text text-transparent">
-                Akash Tandon
-              </span>
-            </h1>
-
-            <div className="max-w-2xl">
-              <p className="text-xl md:text-2xl text-gray-600 leading-relaxed">
-                Founder, builder, and writer exploring the intersection of{' '}
-                <span className="text-gray-900 font-medium">startups</span>,{' '}
-                <span className="text-gray-900 font-medium">AI</span>, and{' '}
-                <span className="text-gray-900 font-medium">technology</span>.
-              </p>
-            </div>
-
-            <div className="pt-4">
-              <SocialLinks refined />
-            </div>
-          </div>
+    <div style={{
+      minHeight: '100vh',
+      background: 'linear-gradient(180deg, #00FFFF 0%, #FF00FF 50%, #FFFF00 100%)',
+      fontFamily: '"Times New Roman", Times, serif',
+      padding: '20px'
+    }}>
+      {/* Animated marquee banner */}
+      <div style={{
+        backgroundColor: '#FF0000',
+        color: '#FFFF00',
+        padding: '10px',
+        border: '5px ridge #FFD700',
+        marginBottom: '20px',
+        fontFamily: '"Courier New", monospace',
+        fontSize: '18px',
+        fontWeight: 'bold',
+        overflow: 'hidden'
+      }}>
+        <div style={{
+          animation: 'marquee 20s linear infinite',
+          whiteSpace: 'nowrap'
+        }}>
+          ✨ WELCOME TO AKASH&apos;S HOMEPAGE ✨ BEST VIEWED IN NETSCAPE NAVIGATOR ✨ LAST UPDATED: {new Date().toLocaleDateString()} ✨ WELCOME TO AKASH&apos;S HOMEPAGE ✨
         </div>
-      </section>
+      </div>
 
-      {/* Recent Posts Section */}
-      {posts.length > 0 && (
-        <section className="max-w-5xl mx-auto px-6 py-16">
-          <div className="mb-12">
-            <div className="flex items-center justify-between mb-3">
-              <h2
-                className="text-4xl md:text-5xl font-bold text-gray-900"
-                style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}
-              >
-                Recent Writing
-              </h2>
-              <Link
-                href="/blog/"
-                className="group inline-flex items-center gap-2 text-accent hover:text-accent-hover font-medium transition-colors"
-              >
-                <span>View all</span>
-                <svg
-                  className="w-4 h-4 transition-transform group-hover:translate-x-1"
-                  fill="none"
-                  viewBox="0 0 24 24"
-                  stroke="currentColor"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </div>
-            <div className="w-16 h-1 bg-gradient-to-r from-accent to-transparent"></div>
-          </div>
+      {/* Main content table */}
+      <center>
+        <table border={5} cellPadding={20} style={{
+          backgroundColor: '#FFFFFF',
+          maxWidth: '800px',
+          borderColor: '#000000'
+        }}>
+          <tbody>
+            <tr>
+              <td>
+                {/* Header with blinking text */}
+                <center>
+                  <h1 style={{
+                    fontFamily: '"Comic Sans MS", cursive',
+                    color: '#FF0000',
+                    fontSize: '48px',
+                    textShadow: '3px 3px #000000',
+                    marginBottom: '10px'
+                  }}>
+                    <span style={{ animation: 'blink 1s infinite' }}>★</span>
+                    {' '}AKASH TANDON{' '}
+                    <span style={{ animation: 'blink 1s infinite' }}>★</span>
+                  </h1>
 
-          <div className="space-y-6">
-            {posts.map((post, index) => (
-              <RefinedBlogCard key={post.slug} post={post} index={index} />
-            ))}
-          </div>
-        </section>
-      )}
+                  <div style={{
+                    width: '88px',
+                    height: '31px',
+                    background: 'linear-gradient(135deg, #ff0000 25%, #ffff00 25%, #ffff00 50%, #ff0000 50%, #ff0000 75%, #ffff00 75%)',
+                    border: '2px solid #000',
+                    margin: '10px auto',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    fontFamily: '"Arial Black", Arial, sans-serif',
+                    fontSize: '12px',
+                    fontWeight: 'bold',
+                    animation: 'blink 2s infinite'
+                  }}>
+                    UNDER CONSTRUCTION
+                  </div>
 
-      {/* Footer */}
-      <footer className="max-w-5xl mx-auto px-6 py-16 mt-16 border-t border-gray-200">
-        <p className="text-sm text-gray-500 text-center">
-          © 2025 Akash Tandon · Crafted with care
-        </p>
-      </footer>
+                  <p style={{
+                    fontFamily: '"Times New Roman", Times, serif',
+                    fontSize: '20px',
+                    lineHeight: '1.6',
+                    color: '#000080'
+                  }}>
+                    <b>FOUNDER, BUILDER, AND WRITER</b>
+                    <br />
+                    I write about <span style={{ color: '#FF0000' }}>STARTUPS</span>, <span style={{ color: '#008000' }}>AI</span>, and <span style={{ color: '#0000FF' }}>TECHNOLOGY</span>
+                  </p>
 
-      <style jsx global>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(20px); }
-          to { opacity: 1; transform: translateY(0); }
+                  {/* Visitor counter */}
+                  <div style={{
+                    background: '#000',
+                    color: '#0f0',
+                    padding: '10px',
+                    border: '3px ridge #666',
+                    margin: '15px auto',
+                    fontFamily: '"Courier New", monospace',
+                    fontSize: '24px',
+                    fontWeight: 'bold',
+                    letterSpacing: '3px',
+                    display: 'inline-block'
+                  }}>
+                    {String(Math.floor(Math.random() * 999999)).padStart(6, '0')}
+                  </div>
+                  <br />
+                  <span style={{ fontSize: '14px' }}>You are visitor number</span>
+                </center>
+
+                <hr style={{ height: '5px', backgroundColor: '#FF00FF', border: 'none' }} />
+
+                {/* Social Links - 90s style */}
+                <center>
+                  <p style={{ fontFamily: '"Courier New", monospace', fontSize: '14px' }}>
+                    <b>*** FIND ME ON THE INFORMATION SUPERHIGHWAY ***</b>
+                  </p>
+                  <SocialLinks />
+                </center>
+
+                <hr style={{ height: '5px', backgroundColor: '#00FFFF', border: 'none' }} />
+
+                {/* Blog Posts */}
+                {posts.length > 0 && (
+                  <>
+                    <h2 style={{
+                      fontFamily: '"Arial Black", Arial, sans-serif',
+                      color: '#0000FF',
+                      textAlign: 'center',
+                      fontSize: '32px',
+                      textDecoration: 'underline'
+                    }}>
+                      <span style={{ animation: 'blink 1.5s infinite' }}>→</span>
+                      {' '}LATEST WRITINGS{' '}
+                      <span style={{ animation: 'blink 1.5s infinite' }}>←</span>
+                    </h2>
+
+                    {posts.map(post => (
+                      <div key={post.slug} style={{
+                        backgroundColor: '#FFFF99',
+                        border: '3px dashed #FF0000',
+                        padding: '15px',
+                        marginBottom: '15px'
+                      }}>
+                        <Link href={`/blog/${post.slug}/`} style={{ textDecoration: 'none' }}>
+                          <h3 style={{
+                            fontFamily: '"Comic Sans MS", cursive',
+                            color: '#FF00FF',
+                            fontSize: '24px',
+                            textDecoration: 'underline'
+                          }}>
+                            ★ {post.title}
+                          </h3>
+                        </Link>
+                        <p style={{
+                          fontFamily: '"Times New Roman", Times, serif',
+                          fontSize: '16px',
+                          color: '#000000'
+                        }}>
+                          {post.excerpt}
+                        </p>
+                        <p style={{
+                          fontFamily: '"Courier New", monospace',
+                          fontSize: '12px',
+                          color: '#666666'
+                        }}>
+                          <b>POSTED:</b> {new Date(post.date).toLocaleDateString()} |
+                          <b> CATEGORY:</b> {post.category} |
+                          <b> TIME:</b> {post.readingTime}
+                        </p>
+                        <Link
+                          href={`/blog/${post.slug}/`}
+                          style={{
+                            backgroundColor: '#00FF00',
+                            color: '#000000',
+                            padding: '5px 15px',
+                            textDecoration: 'none',
+                            border: '2px outset #00FF00',
+                            fontFamily: '"Arial", sans-serif',
+                            fontWeight: 'bold',
+                            display: 'inline-block'
+                          }}
+                        >
+                          [ READ MORE &gt;&gt; ]
+                        </Link>
+                      </div>
+                    ))}
+
+                    <center>
+                      <Link
+                        href="/blog/"
+                        style={{
+                          backgroundColor: '#FF0000',
+                          color: '#FFFF00',
+                          padding: '10px 20px',
+                          textDecoration: 'none',
+                          border: '4px outset #FF0000',
+                          fontFamily: '"Arial Black", Arial, sans-serif',
+                          fontSize: '18px',
+                          display: 'inline-block',
+                          margin: '20px 0'
+                        }}
+                      >
+                        «« SEE ALL POSTS »»
+                      </Link>
+                    </center>
+                  </>
+                )}
+
+                <hr style={{ height: '5px', backgroundColor: '#FF00FF', border: 'none' }} />
+
+                {/* Footer */}
+                <center>
+                  <p style={{
+                    fontFamily: '"Courier New", monospace',
+                    fontSize: '14px',
+                    color: '#000000',
+                    lineHeight: '1.8'
+                  }}>
+                    <b>This page is best viewed in:</b><br />
+                    ★ Netscape Navigator 4.0+<br />
+                    ★ 800x600 screen resolution<br />
+                    ★ 256 colors<br />
+                    <br />
+                    <span style={{ fontSize: '10px' }}>© {new Date().getFullYear()} Akash Tandon. All rights reserved.<br />
+                    Webmaster: akash@internet.com<br />
+                    Last updated: {new Date().toLocaleDateString()}</span>
+                  </p>
+                </center>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </center>
+
+      {/* CSS for animations */}
+      <style jsx>{`
+        @keyframes blink {
+          0%, 49% { opacity: 1; }
+          50%, 100% { opacity: 0; }
+        }
+        @keyframes marquee {
+          from { transform: translateX(0); }
+          to { transform: translateX(-50%); }
         }
       `}</style>
     </div>
-  )
-}
-
-function RefinedBlogCard({ post, index }: { post: BlogPost; index: number }) {
-  return (
-    <Link
-      href={`/blog/${post.slug}/`}
-      className="group block"
-      style={{
-        animation: 'fadeIn 0.6s ease-out forwards',
-        animationDelay: `${index * 0.1}s`,
-        opacity: 0
-      }}
-    >
-      <article className="relative bg-white border border-gray-200 rounded-xl p-8 transition-all duration-300 hover:shadow-xl hover:border-accent/30 hover:-translate-y-1">
-        {/* Decorative corner accent */}
-        <div className="absolute top-0 right-0 w-24 h-24 bg-gradient-to-br from-accent/5 to-transparent rounded-bl-full transition-opacity group-hover:opacity-100 opacity-0"></div>
-
-        <div className="relative">
-          {/* Category badge */}
-          <div className="inline-block mb-3">
-            <span className="text-xs uppercase tracking-wider text-accent font-semibold px-3 py-1 bg-accent/10 rounded-full">
-              {post.category}
-            </span>
-          </div>
-
-          {/* Title */}
-          <h3
-            className="text-2xl md:text-3xl font-bold text-gray-900 mb-3 group-hover:text-accent transition-colors leading-snug"
-            style={{ fontFamily: 'Georgia, Cambria, "Times New Roman", Times, serif' }}
-          >
-            {post.title}
-          </h3>
-
-          {/* Excerpt */}
-          <p className="text-gray-600 mb-4 leading-relaxed line-clamp-2">
-            {post.excerpt}
-          </p>
-
-          {/* Meta */}
-          <div className="flex items-center gap-4 text-sm text-gray-500">
-            <time dateTime={post.date}>
-              {new Date(post.date).toLocaleDateString('en-US', {
-                year: 'numeric',
-                month: 'short',
-                day: 'numeric'
-              })}
-            </time>
-            <span>·</span>
-            <span>{post.readingTime}</span>
-          </div>
-
-          {/* Read more indicator */}
-          <div className="absolute bottom-0 right-0 opacity-0 group-hover:opacity-100 transition-opacity">
-            <div className="flex items-center gap-2 text-accent text-sm font-medium">
-              <span>Read article</span>
-              <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-            </div>
-          </div>
-        </div>
-      </article>
-    </Link>
   )
 }
