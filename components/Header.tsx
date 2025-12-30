@@ -2,10 +2,12 @@
 
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
+import { usePathname } from 'next/navigation'
 
 export default function Header() {
   const [isRetroMode, setIsRetroMode] = useState(false)
   const [mounted, setMounted] = useState(false)
+  const pathname = usePathname()
 
   useEffect(() => {
     setMounted(true)
@@ -59,6 +61,9 @@ export default function Header() {
     )
   }
 
+  // Check if we're on the homepage (with or without basePath)
+  const isHomepage = pathname === '/' || pathname === '/analyticalmonk.github.io-2' || pathname === '/analyticalmonk.github.io-2/'
+
   return (
     <header className="border-b border-gray-200">
       <nav className="max-w-4xl mx-auto px-4 py-6 flex justify-between items-center">
@@ -66,23 +71,25 @@ export default function Header() {
           Akash Tandon
         </Link>
         <div className="flex items-center gap-6">
-          <button
-            onClick={toggleMode}
-            className={`px-3 py-2 rounded-lg font-medium transition-all duration-300 text-sm ${
-              isRetroMode
-                ? 'bg-yellow-400 text-black border-2 border-black font-bold'
-                : 'bg-gray-50 text-gray-700 border border-gray-300 hover:border-accent hover:bg-gray-100'
-            }`}
-            aria-label="Toggle time machine"
-            style={isRetroMode ? { fontFamily: 'Courier New, monospace' } : {}}
-          >
-            <div className="flex items-center gap-2">
-              <span className="text-base">⏰</span>
-              <span className="font-semibold">
-                {isRetroMode ? '1995' : '2025'}
-              </span>
-            </div>
-          </button>
+          {isHomepage && (
+            <button
+              onClick={toggleMode}
+              className={`px-3 py-2 rounded-lg font-medium transition-all duration-300 text-sm ${
+                isRetroMode
+                  ? 'bg-yellow-400 text-black border-2 border-black font-bold'
+                  : 'bg-gray-50 text-gray-700 border border-gray-300 hover:border-accent hover:bg-gray-100'
+              }`}
+              aria-label="Toggle time machine"
+              style={isRetroMode ? { fontFamily: 'Courier New, monospace' } : {}}
+            >
+              <div className="flex items-center gap-2">
+                <span className="text-base">⏰</span>
+                <span className="font-semibold">
+                  {isRetroMode ? '1995' : '2025'}
+                </span>
+              </div>
+            </button>
+          )}
           <Link href="/blog" className="hover:text-accent transition-colors">
             Blog
           </Link>
