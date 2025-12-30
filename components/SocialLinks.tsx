@@ -28,7 +28,28 @@ const icons = {
   ),
 }
 
-export default function SocialLinks() {
+export default function SocialLinks({ refined = false }: { refined?: boolean }) {
+  if (refined) {
+    return (
+      <div className="flex flex-wrap gap-5">
+        {SOCIAL_LINKS.map(link => (
+          <a
+            key={link.name}
+            href={link.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="text-gray-700 hover:text-accent transition-all duration-300 p-2 rounded-lg hover:bg-accent/5 hover:scale-110"
+            aria-label={link.name}
+          >
+            <div className="w-7 h-7">
+              {icons[link.icon as keyof typeof icons]}
+            </div>
+          </a>
+        ))}
+      </div>
+    )
+  }
+
   return (
     <div className="flex gap-4">
       {SOCIAL_LINKS.map(link => (
