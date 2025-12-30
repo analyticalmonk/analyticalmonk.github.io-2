@@ -28,7 +28,7 @@ const icons = {
   ),
 }
 
-export default function SocialLinks({ refined = false }: { refined?: boolean }) {
+export default function SocialLinks({ refined = false, centered = false }: { refined?: boolean; centered?: boolean }) {
   if (refined) {
     return (
       <div className="flex flex-wrap gap-5">
@@ -51,7 +51,7 @@ export default function SocialLinks({ refined = false }: { refined?: boolean }) 
   }
 
   return (
-    <div className="flex gap-4">
+    <div className={`flex gap-4 ${centered ? 'justify-center' : ''}`}>
       {SOCIAL_LINKS.map(link => (
         <a
           key={link.name}

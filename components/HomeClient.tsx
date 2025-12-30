@@ -178,7 +178,7 @@ function RetroLanding({ posts }: { posts: BlogPost[] }) {
                   <p style={{ fontFamily: '"Courier New", monospace', fontSize: '14px' }}>
                     <b>*** FIND ME ON THE INFORMATION SUPERHIGHWAY ***</b>
                   </p>
-                  <SocialLinks />
+                  <SocialLinks centered />
                 </center>
 
                 <hr style={{ height: '3px', backgroundColor: '#00FFFF', border: 'none', margin: '20px 0' }} />
